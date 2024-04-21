@@ -1,0 +1,252 @@
+<?php
+include '../koneksi.php';
+// mengaktifkan session
+session_start();
+$username = $_SESSION['username'];
+
+$sql = "SELECT * FROM user where username = '$username'";
+$qry = mysqli_query($koneksi, $sql) or die("SQL Error" . mysqli_error($koneksi));
+while ($data = mysqli_fetch_array($qry)) {
+  $nama = $data['nama'];
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sistem Pakar Diagnosis Gangguan Kecemasan - Jenis Gangguan Kecemasan</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../assets/img/gambar-favicon.png" rel="icon">
+  <link href="../../assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #9370db;">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="../../assets/img/gambar-logo.png" alt="logo" width="20%">
+        <span class="d-none d-lg-block" style="color: #fff;">Sistem Pakar</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-md-end" style="width: 73%;">
+      <a href="#" class="nav-link nav-link-lg nav-link-user">
+          <div class="d-sm-none d-lg-inline-block" style="color: #fff;"><b><i class="bi bi-person"></i> <?php echo $nama; ?></b></div>
+      </a>
+    </div>
+    <!-- End Logo -->
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../index.php">
+          <i class="bi bi-house"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../gejala/gejala.php">
+          <i class="bi bi-eyedropper"></i>
+          <span>Gejala</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="../penyakit/penyakit.php">
+          <i class="bi bi-file-medical"></i>
+          <span>Gangguan Kecemasan</span>
+        </a>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../rules/rules.php">
+          <i class="bi bi-diagram-3"></i>
+          <span>Basis Pengetahuan</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../pasien/pasien.php">
+          <i class="bi bi-clipboard2-pulse"></i>
+          <span>Riwayat Konsultasi</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="javascript:;" data-bs-toggle="modal" data-bs-target="#logoutmodal">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Logout</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Tambah Gangguan Kecemasan</h1>
+    </div><!-- End Page Title -->
+    
+    <section>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card col-md-12 mx-auto mt-5">
+            <div class="card-body"> <br><br>
+                <form method="post" action="">
+                    <div class="form-group row mb-3">
+                        <label for="nama_penyakit" class="col-md-4 offset-md-0">Nama Gangguan Kecemasan</label>
+                        <div class="col-sm-8">
+                        <input type="text" class="form-control" id="nama_penyakit" name="nama_penyakit" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="solusi" class="col-md-4 offset-md-0">Solusi Penanganan</label>
+                        <div class="col-sm-8">
+                        <textarea class="form-control" rows="8" id="solusi" name="solusi" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 offset-md-4">
+                  <div>
+                    <button class="btn btn-primary mt-4 btn-md" name="simpan" type="submit" style="background-color: #9370db; padding: 6px 108px;"><i class="bi bi-check-lg"></i> Simpan</button>
+                    <a href="./penyakit.php" class="btn btn-danger mt-4 btn-md"  style="float: right; padding: 6px 108px;"> <i class="bi bi-x"></i> Batal</a>
+                  </div>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php
+      if (isset($_POST['simpan'])) {
+        $nama_penyakit = $_POST['nama_penyakit'];
+        $solusi = $_POST['solusi'];
+
+        $query = mysqli_query($koneksi, "SELECT max(kode_gangguan) as kodeTerbesar FROM gangguan");
+                      $data = mysqli_fetch_array($query);
+                      $kode = $data['kodeTerbesar'];
+
+                      $urutan = (int) substr($kode, 1);
+                      $urutan++;
+                      $huruf = "G";
+                      $kode = $huruf . sprintf("%02s", $urutan);
+
+        //cek keberadaan data
+        $sqlrs = mysqli_query($koneksi, "SELECT kode_gangguan FROM gangguan WHERE kode_gangguan='$kode'");
+        $rs = mysqli_num_rows($sqlrs);
+        if ($rs == 0) {
+          $perintah = "INSERT INTO gangguan(kode_gangguan,nama_gangguan,solusi)VALUES('$kode','$nama_penyakit','$solusi')";
+          $berhasil = mysqli_query($koneksi, $perintah);
+
+          //jika data berhasil disimpan
+          if ($berhasil) {
+            echo '<script>alert("Data berhasil disimpan"); window.location.href="./penyakit.php";</script>'   ;
+          } else {
+            echo '<script>alert("Data gagal disimpan");</script>'    ;
+          }
+          }
+          }
+        ?>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- Logout Modal -->
+  <div class="modal fade" id="logoutmodal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Apakah Anda yakin ingin keluar?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <a href="../login.php" type="button" class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i> Ya</a>
+          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="bi bi-x"></i> Tidak</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Logout Modal-->
+
+  <!-- Vendor JS Files -->
+  <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/chart.js/chart.min.js"></script>
+  <script src="../../assets/vendor/echarts/echarts.min.js"></script>
+  <script src="../../assets/vendor/quill/quill.min.js"></script>
+  <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/jquery.truncatable.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../../assets/js/main.js"></script>
+
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#myTable").dataTable();
+    })
+  </script>
+
+  <script type="text/javascript">
+    
+    //expande text
+    $(function() {
+      $('.text').truncatable({
+        limit: 100,
+        more: '[<strong style="color:red;">&raquo;&raquo;&raquo;</strong>]',
+        less: true,
+        hideText: '[<strong>&laquo;&laquo;&laquo;</strong>]'
+      });
+    });
+    
+    $('#myTab a').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#loading-example-btn').click(function() {
+      var btn = $(this);
+      btn.button('loading');
+      // $.ajax(...).always(function () {
+      //   btn.button('reset');
+      // });
+    });
+  </script>
+
+
+</body>
+
+</html>
