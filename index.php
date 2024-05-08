@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan</title>
+  <title>Sistem Pakar Pemodelan Data</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="./assets/img/gambar-favicon.png" rel="icon">
-  <link href="./assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
-
+  <link href="assets/img/gambar-logo.svg" rel="icon">
+  <link href="assets/img/gambar-logo.svg" rel="apple-touch-icon">
+  
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -72,7 +72,7 @@
       <!-- Awal Navbar -->
       <nav class="navbar navbar-expand-lg" style="background-color: #9370db;">
         <div class="container">
-          <a class="navbar-brand text-white fw-bold">Sistem Pakar Diagnosis Gangguan Kecemasan</a>
+          <a class="navbar-brand text-white fw-bold">Sistem Pakar Pemodelan Data</a>
           <a class="nav-link active adm1 p-2" aria-current="page" href="./index.php"><i class="bi bi-house-fill"></i> Home</a>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="./admin/login.php" type="submit" class=" adm me-md-2"><i class="bi bi-box-arrow-in-right"></i>
@@ -85,11 +85,11 @@
 
       <!-- Jumbotron -->
       <div class="bg-light p-5 mb-4 rounded">
-        <img src="./assets/img/gambar-logo.png" class="float-end me-5" width="400px">
+        <img src="./assets/img/gambar-logo.svg" class="float-end me-5" width="400px">
         <div class="container-fluid ms-5">
-          <h1 class="fw-bold datang">Gangguan Kecemasan</h1><br>
+          <h1 class="fw-bold datang">Pemodelan Data</h1><br>
           <div style="width: 600px">
-            <p align="justify">Sistem Pakar Diagnosis Gangguan Kecemasan ini adalah sebuah sistem yang digunakan untuk mendiagnosa awal jenis gangguan kecemasan yang diderita oleh pasien berdasarkan gejala yang dialami pasien. Proses diagnosa dilakukan dengan menentukan gejala-gejala yang terjadi pada pasien, dengan menggunakan metode Dempster Shafer maka sistem dapat memberikan keputusan tentang hasil diagnosa awal.</p>
+            <p align="justify">Pemodelan data adalah proses membuat representasi visual yang mendefinisikan pengumpulan informasi dan sistem manajemen organisasi mana pun. Model data ini membantu berbagai pemangku kepentingan, seperti analis data, ilmuwan, dan insinyur, untuk menciptakan pandangan terpadu tentang data organisasi.</p>
           </div><br>
           <a href="./konsultasi.php" type="button" class="konsul"><i class="bi bi-clipboard2-pulse"></i> Konsultasi</a>
         </div>

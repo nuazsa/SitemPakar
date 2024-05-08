@@ -10,7 +10,7 @@ include "./koneksi.php";
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan - Login Admin</title>
+  <title>Sistem Pakar Pemodelan Data - Login Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -64,7 +64,7 @@ include "./koneksi.php";
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="pt-2 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color: #483d8b;">Sistem Pakar Diagnosis Gangguan Kecemasan</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color: #483d8b;">Sistem Pakar Pemodelan Data</h5>
                   </div>
                   <?php
                   if (isset($_GET['pesan'])) {
@@ -98,7 +98,7 @@ include "./koneksi.php";
               </div>
 
               <div class="credits">
-               <p>Rumah Sakit Jiwa</p>
+               <p>Pakar Teknologi Informasi</p>
               </div>
             </div>
           </div>

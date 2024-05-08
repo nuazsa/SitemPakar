@@ -10,13 +10,13 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan -  Hasil Diagnosa</title>
+  <title>Sistem Pakar Pemodelan Data</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="./assets/img/gambar-favicon.png" rel="icon">
-  <link href="./assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/gambar-logo.svg" rel="icon">
+  <link href="assets/img/gambar-logo.svg" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -77,30 +77,30 @@ session_start();
 
 <body>
   <div class="container">
-    <h1 class="text-center mt-5" style="color: #483d8b;" font-family: Poppins, sans-serif;>Hasil Diagnosis Gangguan Kecemasan</h1><br><br>
+    <h1 class="text-center mt-5" style="color: #483d8b;" font-family: Poppins, sans-serif;>Hasil Penentuan Model Data</h1><br><br>
     <!-- /.card-header -->
 			<div class="form">
 				<table class="table table-hover">
 					<thead class="th">
 						<tr>
 							<th style="width: 10%">No</th>
-							<th style="width: 20%">Kode Gejala</th>
-							<th style="width: 60%">Gejala yang Dialami</th>
+							<th style="width: 20%">Kode</th>
+							<th style="width: 60%">Pernyataan</th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php
-						$gejala = [];
+						$pernyataan = [];
 						$no = 1;
             if (isset($_POST['evidence'])) { {
-              $gejaladipilih = $_POST['evidence'];
-              foreach ($gejaladipilih as $gjlplh) {
-                $qry = mysqli_query($koneksi, "SELECT * FROM gejala WHERE kode_gejala='$gjlplh' ");
+              $pernyataandipilih = $_POST['evidence'];
+              foreach ($pernyataandipilih as $gjlplh) {
+                $qry = mysqli_query($koneksi, "SELECT * FROM pernyataan WHERE kode_pernyataan='$gjlplh' ");
                 while ($data = mysqli_fetch_array($qry)) {
                   echo "<tr>";
 									echo "<td>" . $no . "</td>";
-									echo "<td>" . $data['kode_gejala'] . "</td>";
-									echo "<td align=justify>" . $data['nama_gejala'] . "</td>";
+									echo "<td>" . $data['kode_pernyataan'] . "</td>";
+									echo "<td align=justify>" . $data['nama_pernyataan'] . "</td>";
 
 									$no+=1;
                 }
@@ -112,46 +112,38 @@ session_start();
 				</table>
 			</div>
 			<!-- /.card-body -->
-    <?php
-    $koneksi = mysqli_connect("localhost", "root", "", "gangguankecemasan");
-
-    // cek koneksi
-    if (mysqli_connect_errno()) {
-      echo "Koneksi database gagal : " . mysqli_connect_error();
-    }
     
-    ?>
     <?php
-    $nama_pasien = $_POST['name'];
+    $nama_klien = $_POST['name'];
     $umur = $_POST['umur'];
 
-    //Mengambil Nilai Belief Gejala yang Dipilih
+    //Mengambil Nilai Belief pernyataan yang Dipilih
     if (isset($_POST['evidence'])) { 
       
-        $sql = "SELECT GROUP_CONCAT(gangguan.kode_gangguan), rule.nilai_densitas FROM rule 
-                JOIN gangguan ON rule.kode_gangguan = gangguan.kode_gangguan WHERE rule.kode_gejala 
-                IN('" . implode("','", $_POST['evidence']) . "') GROUP BY rule.kode_gejala";
+        $sql = "SELECT GROUP_CONCAT(model.kode_model), rule.nilai_densitas FROM rule 
+                JOIN model ON rule.kode_model = model.kode_model WHERE rule.kode_pernyataan 
+                IN('" . implode("','", $_POST['evidence']) . "') GROUP BY rule.kode_pernyataan";
                 
         $result=$koneksi->query($sql);
-        $gejala=array();
+        $pernyataan=array();
         while($row=$result->fetch_row()){
-          $gejala[]=$row;
+          $pernyataan[]=$row;
         }
 
         //--- menentukan environement
-        $sql="SELECT GROUP_CONCAT(gangguan.kode_gangguan) FROM gangguan";
+        $sql="SELECT GROUP_CONCAT(model.kode_model) FROM model";
         $result=$koneksi->query($sql);
         $row=$result->fetch_row();
         $fod=$row[0];
 
         //--- menentukan nilai densitas
 					$densitas_baru=array();
-					while(!empty($gejala)){
-						$densitas1[0]=array_shift($gejala);
+					while(!empty($pernyataan)){
+						$densitas1[0]=array_shift($pernyataan);
 						$densitas1[1]=array($fod,1-$densitas1[0][1]);
 						$densitas2=array();
             if(empty($densitas_baru)){
-							$densitas2[0]=array_shift($gejala);
+							$densitas2[0]=array_shift($pernyataan);
 						}
             else{
 							foreach($densitas_baru as $k=>$r){
@@ -193,16 +185,16 @@ session_start();
 						}
         }
 
-        //menentukan urutan penyakit
+        //menentukan urutan model
         // menghancurkan variabel yang ditentukan
         unset($densitas_baru["&theta;"]);
         // mengurutkan array berdasarkan nilai
         arsort($densitas_baru);
 
         $arrPenyakit = array();
-        $qry = mysqli_query($koneksi, "SELECT * FROM gangguan");
+        $qry = mysqli_query($koneksi, "SELECT * FROM model");
         while ($data = mysqli_fetch_array($qry)) {
-          $arrPenyakit["$data[kode_gangguan]"] = $data['nama_gangguan'];
+          $arrPenyakit["$data[kode_model]"] = $data['nama_model'];
         }
         $datasolusi = array();
         $datasolusi = array_intersect_key($arrPenyakit, $densitas_baru);
@@ -210,7 +202,7 @@ session_start();
           foreach ($densitas_baru as $kdpenyakit => $ranking) {
             if ($k == $kdpenyakit) {
               //mengambil solusi penyakit
-              $strS = mysqli_query($koneksi, "SELECT * FROM gangguan WHERE kode_gangguan='$k' ");
+              $strS = mysqli_query($koneksi, "SELECT * FROM model WHERE kode_model='$k' ");
               $dataS = mysqli_fetch_array($strS);
             }
           }
@@ -222,20 +214,32 @@ session_start();
         $codes = array_keys($densitas_baru);
         $final_codes = explode(',', $codes[0]);
     
-        $sql = "SELECT GROUP_CONCAT(nama_gangguan) FROM gangguan 
-        WHERE kode_gangguan IN('" . implode("','", $final_codes) . "')";
+        $sql = "SELECT GROUP_CONCAT(nama_model) FROM model 
+        WHERE kode_model IN('" . implode("','", $final_codes) . "')";
         $result = $koneksi->query($sql);
         $row = $result->fetch_row();
-        echo "<div class=\"diagnosa\">";
-        echo "<p><b>Kesimpulan Hasil Diagnosa Awal Gangguan Kecemasan:</b></p>";
-        echo "<p>Jenis gangguan kecemasan yang terdeteksi adalah <b>{$row[0] }</b> dengan derajat kepercayaan sebesar <b>" . round($densitas_baru[$codes[0]] * 100, 2) . "%</b></p>";
-        echo "<br>";
-        echo "<p><b>Solusi Penanganan dari {$row[0] }:</b></p>";
-        echo "<p>" . $dataS['solusi'] . "</p>";
-        echo "</div>";
 
-        $querySimpanP = mysqli_query($koneksi, "INSERT INTO pasien (nama_pasien,umur,kode_gangguan,kode_gejala,hasil)
-                        VALUES ('$nama_pasien','$umur','$final_codes[0]','".serialize($_POST['evidence'])."','". round($densitas_baru[$codes[0]] * 100, 2) ."') ");
+        $querySimpanP = mysqli_query($koneksi, "INSERT INTO klien (nama_klien,umur,kode_model,kode_pernyataan,hasil)
+                        VALUES ('$nama_klien','$umur','$final_codes[0]','".serialize($_POST['evidence'])."','". round($densitas_baru[$codes[0]] * 100, 2) ."') ");
+        // Mendapatkan ID dari data yang baru saja di-insert
+        $id_baru = mysqli_insert_id($koneksi);
+
+        $result = $koneksi->query("SELECT * FROM klien JOIN model ON klien.kode_model = model.kode_model WHERE id_klien='$id_baru'");
+
+        $no = 1;
+        while($row1 = mysqli_fetch_array($result)):
+            $solusi = $row1['solusi'];
+          $no++;
+        endwhile;
+                  
+        echo "<div class=\"diagnosa\">";
+        echo "<p><b>Kesimpulan Hasil Penentuan Model Data:</b></p>";
+        echo "<p>Jenis model data yang cocok adalah <b>{$row[0] }</b> dengan derajat kepercayaan sebesar <b>" . round($densitas_baru[$codes[0]] * 100, 2) . "%</b></p>";
+        echo "<br>";
+        echo "<p><b>Penjelasan & Saran {$row[0] }:</b></p>";
+        echo "<p>" . $solusi . "</p>";
+        echo "</div>";
+    
       
       }
     ?><br>
@@ -244,7 +248,7 @@ session_start();
         <b>Catatan</b>
       </p>
       <p>
-        Untuk memperoleh penatalaksanaan yang lebih spesifik, maka akan dilakukan pemeriksaan fisik lebih lanjut.
+        Untuk memperoleh penatalaksanaan yang lebih spesifik, maka lakukan diskusi lebih lanjut dengan Administrator Basis Data.
       </p>
     </div>
 <br><br>

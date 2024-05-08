@@ -23,13 +23,13 @@ while ($data = mysqli_fetch_array($qry)) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan</title>
+  <title>Sistem Pakar Pemodelan Data</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/gambar-favicon.png" rel="icon">
-  <link href="../assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../assets/img/gambar-logo.svg" rel="icon">
+  <link href="../assets/img/gambar-logo.svg" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -56,7 +56,7 @@ while ($data = mysqli_fetch_array($qry)) {
   <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #9370db;">
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
-        <img src="../assets/img/gambar-logo.png" alt="logo" width="20%">
+        <img src="../assets/img/gambar-logo.svg" alt="logo" width="20%">
         <span class="d-none d-lg-block" style="color: #fff;">Sistem Pakar</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -82,16 +82,16 @@ while ($data = mysqli_fetch_array($qry)) {
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="./gejala/gejala.php">
+        <a class="nav-link collapsed" href="./pernyataan/pernyataan.php">
           <i class="bi bi-eyedropper"></i>
-          <span>Gejala</span>
+          <span>Pernyataan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="./penyakit/penyakit.php">
+        <a class="nav-link collapsed" href="./pemodelan/pemodelan.php">
           <i class="bi bi-file-medical"></i>
-          <span>Gangguan Kecemasan</span>
+          <span>Pemodelan Data</span>
         </a>
       </li><!-- End Components Nav -->
 
@@ -103,7 +103,7 @@ while ($data = mysqli_fetch_array($qry)) {
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="./pasien/pasien.php">
+        <a class="nav-link collapsed" href="./konsultasi/konsultasi.php">
           <i class="bi bi-clipboard2-pulse"></i>
           <span>Riwayat Konsultasi</span>
         </a>
@@ -126,18 +126,18 @@ while ($data = mysqli_fetch_array($qry)) {
 
     <section>
     <?php 
-    $count1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM gangguan"));
-    $count2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM gejala"));
+    $count1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM model"));
+    $count2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM pernyataan"));
     $count3 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM rule"));
-    $count4 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM pasien"));
+    $count4 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM klien"));
   ?>
   <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./penyakit/penyakit.php">
+      <a href="./pemodelan/pemodelan.php">
           <div class="card-wrap">
             <div class="card-header" style="width: 100%; padding: 1px;">
             <div class="card-icon bg-danger" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-file-medical"></i> Gangguan Kecemasan</h6></center>
+              <center><h6 style="padding-top: 15px;"><i class="bi bi-file-medical"></i> Model Data</h6></center>
             </div>
             <div class="card-body" style="padding-top: 5px;"><center><?php echo $count1; ?></center></div>
           </div>
@@ -145,11 +145,11 @@ while ($data = mysqli_fetch_array($qry)) {
       </a>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./gejala/gejala.php">
+      <a href="./pernyataan/pernyataan.php">
           <div class="card-wrap">
             <div class="card-header" style="width: 100%; padding: 1px;">
             <div class="card-icon bg-warning" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-eyedropper"></i> Gejala</h6></center>
+              <center><h6 style="padding-top: 15px;"><i class="bi bi-eyedropper"></i> Pernyataan</h6></center>
             </div>
             <div class="card-body" style="padding-top: 5px;"><center><?php echo $count2; ?></center></div>
           </div>
@@ -169,7 +169,7 @@ while ($data = mysqli_fetch_array($qry)) {
       </a>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./pasien/pasien.php">
+      <a href="./konsultasi/konsultasi.php">
           <div class="card-wrap">
             <div class="card-header" style="width: 100%; padding: 1px;">
             <div class="card-icon bg-info" style="color: white; height: 50px">
@@ -187,9 +187,9 @@ while ($data = mysqli_fetch_array($qry)) {
     <div class="col-lg-12 col-md-12 col-12 col-sm-12">
       <div class="card">
         <div class="card-body">
-          <center><img src="../assets/img/gambar-logo.png" width="25%"/></center>
+          <center style="margin: 20px 0;"><img src="../assets/img/gambar-logo.svg" width="25%"/></center>
           <h2 class="text-center">Selamat Datang</h2>
-          <h3 class="text-center">di Sistem Pakar Diagnosis Gangguan Kecemasan</h3>
+          <h3 class="text-center">di Sistem Pakar Pemodelan Data</h3>
         </div>
       </div>
     </div>

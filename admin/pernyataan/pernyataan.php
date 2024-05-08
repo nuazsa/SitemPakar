@@ -11,10 +11,10 @@
   <style>
     .table {
       width: 99%;
-			background: linear-gradient(to left, #FFF, #EEE);
-			border: 1px solid #CCC;
-			border-radius: 5px 5px;
-			padding: 3px 3px 3px 5px;
+      background: linear-gradient(to left, #FFF, #EEE);
+      border: 1px solid #CCC;
+      border-radius: 5px 5px;
+      padding: 3px 3px 3px 5px;
       text-align: center;
     }
 
@@ -52,7 +52,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Basis Pengetahuan Pemodelan Data</h1>
+      <h1>Pernyataan berdasarkan faktor-faktor</h1>
     </div><!-- End Page Title -->
     <br>
 
@@ -61,25 +61,22 @@
         <div class="col-md-12">
 
           <!-- Trigger the modal with a button -->
-          <a href="tambahrules.php" class="tambah" type="button"><i class="bi bi-pencil-square"></i>  Tambah Basis Pengetahuan</a>
-<br><br><br>
+          <a href="tambahpernyataan.php" class="tambah" type="button"><i class="bi bi-pencil-square"></i> Tambah Pernyataan</a>
+          <br><br><br>
           <div class="table-responsive">
-
             <table class="table table-hover">
               <thead class="th">
                 <tr>
                   <th>No</th>
-                  <th style="width: 35%">Pernyataan</th>
-                  <th>Model Data</th>
-                  <th>Nilai Densitas</th>
+                  <th>Kode</th>
+                  <th style="width: 60%">Pernyataan</th>
                   <th colspan="2">Aksi<input type="hidden" id="texthapus"></th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 include "../koneksi.php";
-                $sql = "SELECT * FROM rule INNER JOIN pernyataan ON rule.kode_pernyataan=pernyataan.kode_pernyataan 
-                JOIN model ON rule.kode_model=model.kode_model ORDER BY id_rule";
+                $sql = "SELECT * FROM pernyataan  ORDER BY kode_pernyataan";
                 $qry = mysqli_query($koneksi, $sql) or die("SQL Error" . mysqli_error($koneksi));
                 $no = 0;
                 while ($data = mysqli_fetch_array($qry)) {
@@ -87,11 +84,10 @@
                 ?>
                   <tr>
                     <td><?php echo $no; ?></td>
+                    <td><?php echo $data['kode_pernyataan']; ?></td>
                     <td align=justify><?php echo $data['nama_pernyataan']; ?></td>
-                    <td align=justify><?php echo $data['nama_model']; ?></td>
-                    <td><?php echo $data['nilai_densitas']; ?></td>
-                    <td><a href="./editrules.php?id_ubah=<?php echo $data['id_rule']; ?>" class="btn btn-warning btn-sm" style="color: white;"><i class="bi bi-pencil"></i> Edit</a></td>
-                    <td><a onClick="return HapusData('<?php echo $data['id_rule']; ?>');" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusmodal"><i class="bi bi-trash"></i> Hapus</a>
+                    <td><a href="./editpernyataan.php?id=<?php echo $data['kode_pernyataan']; ?>" class="btn btn-warning btn-sm" style="color: white;"><i class="bi bi-pencil"></i> Edit</a></td>
+                    <td><a onClick="return HapusData('<?php echo $data['kode_pernyataan']; ?>');" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusmodal"><i class="bi bi-trash"></i> Hapus</a>
                     </td>
                   </tr><?php } ?>
               </tbody>
@@ -107,7 +103,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Apakah Anda ingin menghapus data ?</h5>
+          <h5 class="modal-title">Apakah Anda ingin menghapus data?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-footer">
@@ -119,32 +115,10 @@
   </div><!-- End hapus Modal-->
 
   <!-- Logout Modal -->
-  <div class="modal fade" id="logoutmodal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Apakah Anda yakin ingin keluar ?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-footer">
-          <a href="../login.php" type="button" class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i> Ya</a>
-          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="bi bi-x"></i> Tidak</button>
-        </div>
-      </div>
-    </div>
-  </div><!-- End Logout Modal-->
+  <?php require_once '../component/logoutmodal.php' ?>
 
   <!-- Vendor JS Files -->
-  <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/chart.js/chart.min.js"></script>
-  <script src="../../assets/vendor/echarts/echarts.min.js"></script>
-  <script src="../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../../assets/js/jquery.min.js"></script>
-  <script src="../../assets/js/jquery.truncatable.js"></script>
+  <?php require_once '../component/vendor.php' ?>
 
   <!-- Template Main JS File -->
   <script src="../../assets/js/main.js"></script>
@@ -164,7 +138,7 @@
 
     function DropData() {
       var data_hapus = $("#texthapus").val();
-      var aksi = "rule";
+      var aksi = "pernyataan";
       var datanya = "&data_hapus=" + data_hapus + "&aksi=" + aksi; //hapus data
       $.ajax({
         url: "./hapus.php",
@@ -204,9 +178,6 @@
     $('#loading-example-btn').click(function() {
       var btn = $(this);
       btn.button('loading');
-      // $.ajax(...).always(function () {
-      //   btn.button('reset');
-      // });
     });
   </script>
 

@@ -1,47 +1,12 @@
-<?php
-include '../koneksi.php';
-// mengaktifkan session
-session_start();
-$username = $_SESSION['username'];
-
-$sql = "SELECT * FROM user where username = '$username'";
-$qry = mysqli_query($koneksi, $sql) or die("SQL Error" . mysqli_error($koneksi));
-while ($data = mysqli_fetch_array($qry)) {
-  $nama = $data['nama'];
-}
-?>
+<!-- ======= Session ======= -->
+<?php require_once '../component/session.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan - Basis Pengetahuan</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="../../assets/img/gambar-favicon.png" rel="icon">
-  <link href="../../assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-  <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../../assets/css/style.css" rel="stylesheet">
+  <!-- ======= Head ======= -->
+  <?php require_once '../component/head.php' ?>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
@@ -49,76 +14,16 @@ while ($data = mysqli_fetch_array($qry)) {
 
 <body>
 
- <!-- ======= Header ======= -->
- <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #9370db;">
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
-        <img src="../../assets/img/gambar-logo.png" alt="logo" width="20%">
-        <span class="d-none d-lg-block" style="color: #fff;">Sistem Pakar</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div>
-
-    <div class="d-flex align-items-center justify-content-md-end" style="width: 73%;">
-      <a href="#" class="nav-link nav-link-lg nav-link-user">
-          <div class="d-sm-none d-lg-inline-block" style="color: #fff;"><b><i class="bi bi-person"></i> <?php echo $nama; ?></b></div>
-      </a>
-    </div>
-    <!-- End Logo -->
-  </header><!-- End Header -->
+  <!-- ======= Header ======= -->
+  <?php require_once '../component/header.php' ?>
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../index.php">
-          <i class="bi bi-house"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../gejala/gejala.php">
-          <i class="bi bi-eyedropper"></i>
-          <span>Gejala</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../penyakit/penyakit.php">
-          <i class="bi bi-file-medical"></i>
-          <span>Gangguan Kecemasan</span>
-        </a>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link" href="../rules/rules.php">
-          <i class="bi bi-diagram-3"></i>
-          <span>Basis Pengetahuan</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../pasien/pasien.php">
-          <i class="bi bi-clipboard2-pulse"></i>
-          <span>Riwayat Konsultasi</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="javascript:;" data-bs-toggle="modal" data-bs-target="#logoutmodal">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Logout</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-    </ul>
-  </aside><!-- End Sidebar-->
+  <?php require_once '../component/sidebar.php' ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Tambah Basis Pengetahuan Gangguan Kecemasan</h1>
+      <h1>Tambah Basis Pengetahuan Model Data</h1>
     </div><!-- End Page Title -->
 
     <section>
@@ -131,47 +36,47 @@ while ($data = mysqli_fetch_array($qry)) {
               <form method="post" action="">
               <table class="table1">
                   <div class="form-group row mb-3">
-                    <label for="" class="col-md-4 offset-md-0">Gejala Gangguan Kecemasan</label>
+                    <label for="" class="col-md-4 offset-md-0">Pernyataan</label>
                       <div class="col-sm-4">
-                        <select name="daftargejala" id="daftargejala" style="width: 630px;" required>
-                          <option value="">Pilih Gejala Gangguan Kecemasan</option>
+                        <select name="daftarpernyataan" id="daftarpernyataan" style="width: 630px;" required>
+                          <option value="">Pilih Pernyataan</option>
                           <?php
                           include "../koneksi.php";
-                          $arrPenyakit = array();
-                          $arrGejala = array();
-                          $sqlp = "SELECT * FROM gejala ORDER BY kode_gejala";
+                          $arrmodel = array();
+                          $arrpernyataan = array();
+                          $sqlp = "SELECT * FROM pernyataan ORDER BY kode_pernyataan";
                           $qryp = mysqli_query($koneksi, $sqlp)
                             or die("SQL Error: " . mysqli_error($koneksi));
                           while ($datap = mysqli_fetch_array($qryp)) {
-                            if ($datap['kode_gejala'] == $kdgejala) {
+                            if ($datap['kode_pernyataan'] == $kdpernyataan) {
                               $cek = "selected";
                             } else {
                               $cek = "";
                             }
-                            $arrGejala["$datap[kode_gejala]"] = $datap['nama_gejala'];
-                            echo "<option value='$datap[kode_gejala]' $cek>$datap[kode_gejala]&nbsp; - &nbsp;$datap[nama_gejala]</option>";
+                            $arrpernyataan["$datap[kode_pernyataan]"] = $datap['nama_pernyataan'];
+                            echo "<option value='$datap[kode_pernyataan]' $cek>$datap[kode_pernyataan]&nbsp; - &nbsp;$datap[nama_pernyataan]</option>";
                           }
                           ?>
                         </select>
                       </div> 
                     </div>
                     <div class="form-group row mb-3">
-                      <label for="" class="col-md-4 offset-md-0">Jenis Gangguan Kecemasan</label>
+                      <label for="" class="col-md-4 offset-md-0">Jenis Model Data</label>
                         <div class="col-sm-4">
-                        <select name="daftarpenyakit" id="daftarpenyakit" style="width: 630px;" required>
-                          <option value="">Pilih Jenis Gangguan Kecemasan</option>
+                        <select name="daftarmodel" id="daftarmodel" style="width: 630px;" required>
+                          <option value="">Pilih Jenis Model Data</option>
                           <?php
-                          $sqlp = "SELECT * FROM gangguan ORDER BY kode_gangguan";
+                          $sqlp = "SELECT * FROM model ORDER BY kode_model";
                           $qryp = mysqli_query($koneksi, $sqlp)
                             or die("SQL Error: " . mysqli_error($koneksi));
                           while ($datap = mysqli_fetch_array($qryp)) {
-                            if ($datap['kode_gangguan'] == $kdsakit) {
+                            if ($datap['kode_model'] == $kdsakit) {
                               $cek = "selected";
                             } else {
                               $cek = "";
                             }
-                            $arrPenyakit["$datap[kode_gangguan]"] = $datap['nama_gangguan'];
-                            echo "<option value='$datap[kode_gangguan]' $cek>$datap[kode_gangguan]&nbsp; - &nbsp;$datap[nama_gangguan]</option>";
+                            $arrmodel["$datap[kode_model]"] = $datap['nama_model'];
+                            echo "<option value='$datap[kode_model]' $cek>$datap[kode_model]&nbsp; - &nbsp;$datap[nama_model]</option>";
                           }
                           ?>
                         </select>
@@ -200,11 +105,11 @@ while ($data = mysqli_fetch_array($qry)) {
         if (isset($_POST['simpan'])) {
 
         //menampilkan outputnya
-        $kd_gejala = $_POST['daftargejala'];
-        $kd_penyakit = $_POST['daftarpenyakit'];
+        $kd_pernyataan = $_POST['daftarpernyataan'];
+        $kd_model = $_POST['daftarmodel'];
         $belief = $_POST['belief'];
         //menyimpan data kedalam tabel relasi
-        $sql = "INSERT INTO rule (kode_gejala,kode_gangguan,nilai_densitas) VALUES ('$kd_gejala','$kd_penyakit','$belief' )";
+        $sql = "INSERT INTO rule (kode_pernyataan,kode_model,nilai_densitas) VALUES ('$kd_pernyataan','$kd_model','$belief' )";
         $query = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
           
           if ($query) {

@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sistem Pakar Diagnosis Gangguan Kecemasan</title>
+  <title>Sistem Pakar Pemodelan Data</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="./assets/img/gambar-favicon.png" rel="icon">
-  <link href="./assets/img/gambar-apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/gambar-logo.svg" rel="icon">
+  <link href="assets/img/gambar-logo.svg" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -31,7 +31,7 @@
   <link href="./assets/css/style.css" rel="stylesheet">
 
   <style>
-    .gejala {
+    .pernyataan {
       color: blue;
       padding: 5px;
       display: flex;
@@ -50,7 +50,7 @@
 
   <section>
     <div class="card mt-4 col-md-7 mx-auto"> <br>
-      <h4 class="text-dark d-flex justify-content-center mt-4" style="color: #9370db;">Diagnosa Gangguan Kecemasan</h4><br>
+      <h4 class="text-dark d-flex justify-content-center mt-4" style="color: #9370db;">Diagnosa Kebutuhan Berdasarkan Pernyataan</h4><br>
       <div class="card-body">
       <form action="./hasilkonsultasi.php" method="POST">
       <table class="table1">
@@ -68,38 +68,29 @@
 						</div>
 					</div><br>
           <div class="form-group row mb-3">
-							<label for="" class="col-md-2 offset-md-0">Pilih Gejala</label>
+							<label for="" class="col-md-2 offset-md-0">Pilih pernyataan</label>
               <div class="col-md-10" align="justify">
-          
-        <?php
-        $koneksi = mysqli_connect("localhost", "root", "", "gangguankecemasan");
 
-        // Check connection
-        if (mysqli_connect_errno()) {
-          echo "Koneksi database gagal : " . mysqli_connect_error();
-        }
-        ?>
           <?php
-          $sqli = "SELECT * FROM gejala";
-          // $result = mysqli_query($koneksi, $sqli);
+          $sqli = "SELECT * FROM pernyataan";
           $result = $koneksi->query($sqli);
           if (isset($_POST['evidence'])) {
             if (count($_POST['evidence']) < 3) {
-              echo "<p class=\"gejala\">Pilih minimal 3 gejala</p>";
+              echo "<p class=\"pernyataan\">Pilih minimal 3 pernyataan</p>";
             } elseif (count($_POST['evidence']) <= 0) {
-              echo "<p class=\"gejala\">Pilih gejala terlebih dahulu</p>";
+              echo "<p class=\"pernyataan\">Pilih pernyataan terlebih dahulu</p>";
             }
           }
 
           // mengambil baris berikutnya menjadi objek
           while ($row = $result->fetch_object()) {
             echo "<hr> ";
-            echo "<label for='checkbox" . $row->kode_gejala . "' style='cursor: pointer;'>";
-            echo "<input style='cursor: pointer; width:20px;height:20px;' type='checkbox' id='checkbox" . $row->kode_gejala . "' name='evidence[]' value='" . $row->kode_gejala . "'";
+            echo "<label for='checkbox" . $row->kode_pernyataan . "' style='cursor: pointer;'>";
+            echo "<input style='cursor: pointer; width:20px;height:20px;' type='checkbox' id='checkbox" . $row->kode_pernyataan . "' name='evidence[]' value='" . $row->kode_pernyataan . "'";
             if (isset($_POST['evidence'])) {
-              echo (in_array($row->kode_gejala, $_POST['evidence']) ? " checked" : "");
+              echo (in_array($row->kode_pernyataan, $_POST['evidence']) ? " checked" : "");
             }
-            echo ">&ensp; " . $row->nama_gejala . "</label><br>";
+            echo ">&ensp; " . $row->nama_pernyataan . "</label><br>";
           }
           ?>
           </div>
@@ -123,7 +114,7 @@
               }
             }
             if (checkboxesChecked < 3) {
-              alert("Pilih minimal 3 gejala");
+              alert("Pilih minimal 3 pernyataan");
               return false;
             }
           }
