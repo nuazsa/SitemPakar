@@ -64,7 +64,7 @@ while ($data = mysqli_fetch_array($qry)) {
 
     <div class="d-flex align-items-center justify-content-md-end" style="width: 73%;">
       <a href="#" class="nav-link nav-link-lg nav-link-user">
-          <div class="d-sm-none d-lg-inline-block" style="color: #fff;"><b><i class="bi bi-person"></i> <?php echo $nama; ?></b></div>
+        <div class="d-sm-none d-lg-inline-block" style="color: #fff;"><b><i class="bi bi-person"></i> <?php echo $nama; ?></b></div>
       </a>
     </div>
     <!-- End Logo -->
@@ -82,18 +82,18 @@ while ($data = mysqli_fetch_array($qry)) {
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="./pemodelan/pemodelan.php">
+          <i class="bi bi-file-medical"></i>
+          <span>Model Data</span>
+        </a>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="./pernyataan/pernyataan.php">
           <i class="bi bi-eyedropper"></i>
           <span>Pernyataan</span>
         </a>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="./pemodelan/pemodelan.php">
-          <i class="bi bi-file-medical"></i>
-          <span>Pemodelan Data</span>
-        </a>
-      </li><!-- End Components Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="./rules/rules.php">
@@ -125,75 +125,91 @@ while ($data = mysqli_fetch_array($qry)) {
     </div><!-- End Page Title -->
 
     <section>
-    <?php 
-    $count1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM model"));
-    $count2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM pernyataan"));
-    $count3 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM rule"));
-    $count4 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM klien"));
-  ?>
-  <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./pemodelan/pemodelan.php">
-          <div class="card-wrap">
-            <div class="card-header" style="width: 100%; padding: 1px;">
-            <div class="card-icon bg-danger" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-file-medical"></i> Model Data</h6></center>
+      <?php
+      $count1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM model"));
+      $count2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM pernyataan"));
+      $count3 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM rule"));
+      $count4 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM klien"));
+      ?>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <a href="./pemodelan/pemodelan.php">
+            <div class="card-wrap">
+              <div class="card-header" style="width: 100%; padding: 1px;">
+                <div class="card-icon bg-danger" style="color: white; height: 50px">
+                  <center>
+                    <h6 style="padding-top: 15px;"><i class="bi bi-file-medical"></i> Model Data</h6>
+                  </center>
+                </div>
+                <div class="card-body" style="padding-top: 5px;">
+                  <center><?php echo $count1; ?></center>
+                </div>
+              </div>
             </div>
-            <div class="card-body" style="padding-top: 5px;"><center><?php echo $count1; ?></center></div>
-          </div>
+          </a>
         </div>
-      </a>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./pernyataan/pernyataan.php">
-          <div class="card-wrap">
-            <div class="card-header" style="width: 100%; padding: 1px;">
-            <div class="card-icon bg-warning" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-eyedropper"></i> Pernyataan</h6></center>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <a href="./pernyataan/pernyataan.php">
+            <div class="card-wrap">
+              <div class="card-header" style="width: 100%; padding: 1px;">
+                <div class="card-icon bg-warning" style="color: white; height: 50px">
+                  <center>
+                    <h6 style="padding-top: 15px;"><i class="bi bi-eyedropper"></i> Pernyataan</h6>
+                  </center>
+                </div>
+                <div class="card-body" style="padding-top: 5px;">
+                  <center><?php echo $count2; ?></center>
+                </div>
+              </div>
             </div>
-            <div class="card-body" style="padding-top: 5px;"><center><?php echo $count2; ?></center></div>
-          </div>
+          </a>
         </div>
-      </a>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./rules/rules.php">
-          <div class="card-wrap">
-            <div class="card-header" style="width: 100%; padding: 1px;">
-            <div class="card-icon bg-success" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-diagram-3"></i> Basis Pengetahuan</h6></center>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <a href="./rules/rules.php">
+            <div class="card-wrap">
+              <div class="card-header" style="width: 100%; padding: 1px;">
+                <div class="card-icon bg-success" style="color: white; height: 50px">
+                  <center>
+                    <h6 style="padding-top: 15px;"><i class="bi bi-diagram-3"></i> Basis Pengetahuan</h6>
+                  </center>
+                </div>
+                <div class="card-body" style="padding-top: 5px;">
+                  <center><?php echo $count3; ?></center>
+                </div>
+              </div>
             </div>
-            <div class="card-body" style="padding-top: 5px;"><center><?php echo $count3; ?></center></div>
-          </div>
+          </a>
         </div>
-      </a>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-      <a href="./konsultasi/konsultasi.php">
-          <div class="card-wrap">
-            <div class="card-header" style="width: 100%; padding: 1px;">
-            <div class="card-icon bg-info" style="color: white; height: 50px">
-              <center><h6 style="padding-top: 15px;"><i class="bi bi-clipboard2-pulse"></i> Riwayat Konsultasi</h6></center>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <a href="./konsultasi/konsultasi.php">
+            <div class="card-wrap">
+              <div class="card-header" style="width: 100%; padding: 1px;">
+                <div class="card-icon bg-info" style="color: white; height: 50px">
+                  <center>
+                    <h6 style="padding-top: 15px;"><i class="bi bi-clipboard2-pulse"></i> Riwayat Konsultasi</h6>
+                  </center>
+                </div>
+                <div class="card-body" style="padding-top: 5px;">
+                  <center><?php echo $count4; ?></center>
+                </div>
+              </div>
             </div>
-            <div class="card-body" style="padding-top: 5px;"><center><?php echo $count4; ?></center></div>
-          </div>
-        </div>
-      </a>
-    </div>
-    </div>
-  </div>    
-  <br>      <br>  
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <center style="margin: 20px 0;"><img src="../assets/img/gambar-logo.svg" width="25%"/></center>
-          <h2 class="text-center">Selamat Datang</h2>
-          <h3 class="text-center">di Sistem Pakar Pemodelan Data</h3>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+      <br> <br>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <center style="margin: 20px 0;"><img src="../assets/img/gambar-logo.svg" width="25%" /></center>
+              <h2 class="text-center">Selamat Datang</h2>
+              <h3 class="text-center">di Sistem Pakar Pemodelan Data</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main><!-- End #main -->
 
