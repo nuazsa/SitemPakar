@@ -1,6 +1,13 @@
 # SitemPakar – Sistem Pakar untuk Rekomendasi Model Basis Data
 SitemPakar adalah sebuah aplikasi sistem pakar berbasis web yang dirancang untuk membantu para pengembang dalam menentukan model basis data yang paling sesuai dengan kebutuhan proyek mereka. Aplikasi ini menggunakan pendekatan berbasis pertanyaan untuk memahami kebutuhan pengguna, lalu memberikan rekomendasi berdasarkan pengetahuan dari para ahli di bidang teknologi informasi.
 
+## Screenshots
+
+| Laman Awal     | Pertanyaan      | Dashboard Admin      | Data Admin   |
+|--------------------|-------------------|-------------------|-------------------|
+| ![overview](https://github.com/nuazsa/SitemPakar/blob/main/screenshot/Overview.png) | ![quisioner](https://github.com/nuazsa/SitemPakar/blob/main/screenshot/Kuesioner.png) | ![dashboard](https://github.com/nuazsa/SitemPakar/blob/main/screenshot/Beranda.png) | ![dashboard](https://github.com/nuazsa/SitemPakar/blob/main/screenshot/Data.png) |
+
+
 ##  Tujuan Proyek
 Proyek ini bertujuan untuk:
 - Membantu pengembang memilih model basis data (relasional, dokumen, graph, dsb) yang cocok sesuai kebutuhan proyek mereka.
