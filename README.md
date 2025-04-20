@@ -1,7 +1,11 @@
-# Sistem Pakar Dempster-Shafer
+# SitemPakar – Sistem Pakar untuk Rekomendasi Model Basis Data
+SitemPakar adalah sebuah aplikasi sistem pakar berbasis web yang dirancang untuk membantu para pengembang dalam menentukan model basis data yang paling sesuai dengan kebutuhan proyek mereka. Aplikasi ini menggunakan pendekatan berbasis pertanyaan untuk memahami kebutuhan pengguna, lalu memberikan rekomendasi berdasarkan pengetahuan dari para ahli di bidang teknologi informasi.
 
-## Apa Itu Pemodelan Data?
-Menurut [AWS (Amazon Web Service)](https://aws.amazon.com/what-is/data-modeling/) pemodelan data adalah proses membuat representasi visual yang mendefinisikan pengumpulan informasi dan sistem manajemen organisasi mana pun. Model data ini membantu berbagai pemangku kepentingan, seperti analis data, ilmuwan, dan insinyur, untuk menciptakan pandangan terpadu tentang data organisasi.
+##  Tujuan Proyek
+Proyek ini bertujuan untuk:
+- Membantu pengembang memilih model basis data (relasional, dokumen, graph, dsb) yang cocok sesuai kebutuhan proyek mereka.
+- Menyediakan antarmuka interaktif yang menanyakan beberapa pertanyaan teknis kepada pengguna.
+- Memberikan rekomendasi berbasis logika dan pengetahuan ahli melalui penerapan metode sistem pakar (seperti Dempster-Shafer atau rule-based).
 
 ## Formula
 ### Model Data
